@@ -39,8 +39,10 @@ if __name__ == "__main__":
     signal.signal(signal.SIGHUP, sighup_handler)
     try:
         print("Waiting until you finish your marking session.")
-        print("When you are done, either press Ctrl-C, enter, or simply end the SSH connection.")
-        input() # hang until user quits
+        print("When you are done, either press Ctrl-C, or simply end the SSH connection.")
+        # hang until user quits
+        while True:
+            time.sleep(1000000)
     except KeyboardInterrupt:
         pass
     finally:
