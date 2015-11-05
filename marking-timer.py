@@ -39,7 +39,9 @@ if __name__ == "__main__":
     signal.signal(signal.SIGHUP, sighandler)
     signal.signal(signal.SIGTERM, sighandler)
     signal.signal(signal.SIGINT, sighandler)
-    
+    signal.signal(signal.SIGABRT, sighandler)
+    signal.signal(signal.SIGQUIT, sighandler)
+
     print("Waiting until you finish your marking session.")
     print("When you are done, either press Ctrl-C, or simply end the SSH connection.")
     # hang until user quits
