@@ -10,6 +10,7 @@ start_time = 0
 
 def sighup_handler(signum, frame):
 	write_end_time()
+	quit()
 
 def write_start_time():
 	global start_time
