@@ -8,7 +8,7 @@ date_format = "%a %b %d %H:%M:%S %Z %Y"
 
 start_time = 0
 
-def sighup_handler(signum, frame):
+def sighandler(signum, frame):
     write_end_time()
     quit()
 
@@ -36,14 +36,12 @@ def write_end_time():
 if __name__ == "__main__":
     write_start_time()
     # Set up SIGHUP handler
-    signal.signal(signal.SIGHUP, sighup_handler)
-    try:
-        print("Waiting until you finish your marking session.")
-        print("When you are done, either press Ctrl-C, or simply end the SSH connection.")
-        # hang until user quits
-        while True:
-            time.sleep(1000000)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        write_end_time()
+    signal.signal(signal.SIGHUP, sighandler)
+    signal.signal(signal.SIGTERM, sighandler)
+    signal.signal(signal.SIGINT, sighandler)
+    
+    print("Waiting until you finish your marking session.")
+    print("When you are done, either press Ctrl-C, or simply end the SSH connection.")
+    # hang until user quits
+    while True:
+        time.sleep(1000000)
