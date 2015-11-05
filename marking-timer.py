@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import sys
 import time
 import signal
 from datetime import datetime
@@ -14,26 +15,27 @@ def sighandler(signum, frame):
 
 def write_start_time():
     global start_time
-    print("Writing start time to {0}...".format(filename))
+    sys.stderr.write("Writing start time to {0}...\n".format(filename))
     start_time = datetime.now()
-    with open(filename, "a") as hoursfile:
-        hoursfile.write("Start time: ")
-        hoursfile.write(time.strftime(date_format))
-        hoursfile.write('\n')
+
+    sys.stdout.write("Start time: ")
+    sys.stdout.write(time.strftime(date_format))
+    sys.stdout.write('\n')
 
 def write_end_time():
-    print("Writing end time to {0}...".format(filename))
+    sys.stderr.write("Writing end time to {0}...\n".format(filename))
     end_time = datetime.now()
     time_marked = end_time - start_time
-    with open(filename, "a") as hoursfile:
-        hoursfile.write("End time: ")
-        hoursfile.write(time.strftime(date_format))
-        hoursfile.write('\n')
-        hoursfile.write("Total time marked: ")
-        hoursfile.write(str(time_marked).split('.')[0])
-        hoursfile.write("\n\n")
+
+    sys.stdout.write("End time: ")
+    sys.stdout.write(time.strftime(date_format))
+    sys.stdout.write('\n')
+    sys.stdout.write("Total time marked: ")
+    sys.stdout.write(str(time_marked).split('.')[0])
+    sys.stdout.write("\n\n")
 
 if __name__ == "__main__":
+    sys.stdout = open(filename, "a")
     write_start_time()
     # Set up SIGHUP handler
     signal.signal(signal.SIGHUP, sighandler)
@@ -42,8 +44,8 @@ if __name__ == "__main__":
     signal.signal(signal.SIGABRT, sighandler)
     signal.signal(signal.SIGQUIT, sighandler)
 
-    print("Waiting until you finish your marking session.")
-    print("When you are done, either press Ctrl-C, or simply end the SSH connection.")
+    sys.stderr.write("Waiting until you finish your marking session.\n")
+    sys.stderr.write("When you are done, either press Ctrl-C, or simply end the SSH connection.\n")
     # hang until user quits
     while True:
         time.sleep(1000000)
