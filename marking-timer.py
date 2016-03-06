@@ -45,7 +45,8 @@ if __name__ == "__main__":
     signal.signal(signal.SIGQUIT, sighandler)
 
     sys.stderr.write("Waiting until you finish your marking session.\n")
-    sys.stderr.write("When you are done, either press Ctrl-C, or simply end the SSH connection.\n")
+    sys.stderr.write("When you are done, press Ctrl-C.\n")
+    #sys.stderr.write("When you are done, either press Ctrl-C, or simply end the SSH connection.\n")
     # hang until user quits
     while True:
         time.sleep(1000000)
