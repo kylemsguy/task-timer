@@ -33,6 +33,7 @@ def write_end_time():
     sys.stdout.write("Total time marked: ")
     sys.stdout.write(str(time_marked).split('.')[0])
     sys.stdout.write("\n\n")
+    sys.stderr.write("Total time marked: {}\n".format(str(time_marked).split('.')[0]))
 
 if __name__ == "__main__":
     sys.stdout = open(filename, "a")
