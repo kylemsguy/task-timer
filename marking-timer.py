@@ -49,10 +49,15 @@ if __name__ == "__main__":
     sys.stderr.write("When you are done, press Ctrl-C.\n")
     #sys.stderr.write("When you are done, either press Ctrl-C, or simply end the SSH connection.\n")
     # hang until user quits
+    counter = 0
+    spinner = ('-', '\\', '|', '/')
     while True:
+        counter += 1
         end_time = datetime.now()
         time_marked = end_time - start_time
-        sys.stderr.write("Time marked so far: {}\r".format(str(time_marked).split('.')[0]))
+        sys.stderr.write("                                                  \r")
+        sys.stderr.write("Time marked so far: {} {}\r".format(str(time_marked).split('.')[0], spinner[counter % len(spinner)]))
         #time.sleep(1000000)
         #time.sleep(300)
-        time.sleep(1)
+        #time.sleep(1)
+        time.sleep(0.5)
