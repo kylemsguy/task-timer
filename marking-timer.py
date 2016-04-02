@@ -2,6 +2,7 @@
 import sys
 import time
 import signal
+from random import randint
 from datetime import datetime
 
 filename = "hours-marking.txt"
@@ -49,7 +50,7 @@ if __name__ == "__main__":
     sys.stderr.write("When you are done, press Ctrl-C.\n")
     #sys.stderr.write("When you are done, either press Ctrl-C, or simply end the SSH connection.\n")
     # hang until user quits
-    counter = 0
+    counter = randint(0, 3)
     spinner = ('-', '\\', '|', '/')
     while True:
         counter += 1
